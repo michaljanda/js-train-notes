@@ -1,0 +1,16 @@
+{
+  "name": "js-train-notes-backend",
+  "version": "0.0.1",
+  "description": "only some fake backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "MJ",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.16.2",
+    "lodash": "4.17.5"
+  }
+}
