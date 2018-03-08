@@ -19,37 +19,27 @@ let jsFiles = ['./app/**/*.js'];
 let tplFiles = ['./app/**/*.html'];
 let targetDir = './dev';
 
-gulp.task('default', ['compile'], function () {
-  let app = express();
-  let p = proxy.createProxyServer({ target: 'http://localhost:5000/' });
+let browserSync = require('browser-sync');
+let nodemon = require('nodemon');
 
-  app.all('/api/*', function (req, res) {
-    p.web(req, res);
-  });
-
-  app.get('/', function (req, res) {
-    fs.readFile(targetDir + '/index.html', 'utf-8', function (err, jsp) {
-      res.set('Content-Type', 'text/html; charset=utf-8');
-      res.end(jsp.replace(/<%[\s\S]*?%>/g, ''));
-    });
-  });
-
-  app.listen(80, _.partial(open, 'http://localhost/'));
-  app.use('/bower_components', express.static('./bower_components'));
-  app.use(express.static('./dev'));
-
-  connect.server({livereload: true, port: 21});
-
-  let watched = [].concat(indexFile, jsFiles, tplFiles);
-  let watcher = gulp.watch(watched, _.noop);
-
-
-
-  watcher.on('change', function() {
-    gulp.start('reload');
-  });
+gulp.task('default', ['compile','nodemon'], function () {
 
 });
+
+gulp.task('nodemon', function(cb) {
+  	
+	var started = false;
+	
+	return nodemon({
+		script: 'proxy.js'
+	}).on('start', function () {
+		// to avoid nodemon being started multiple times
+		if (!started) {
+			cb();
+			started = true; 
+		} 
+	});
+})
 
 gulp.task('reload', ['compile'], function(){
 });
