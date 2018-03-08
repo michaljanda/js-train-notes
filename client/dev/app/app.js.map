@@ -1,0 +1,1 @@
+{"version":3,"sources":["app/app.js"],"names":["some","asdf"],"mappings":"AAAA;;AAEA,IAAIA,OAAO,MAAX;AACA,CAAC,UAAUC,IAAV,EAAgB;AACf,SAAO,CAAP;AACD,CAFD;AAGA","file":"app.js","sourcesContent":["'use strict';\n\nvar some = 'test';\n(function (asdf) {\n  return 1;\n});\n//# sourceMappingURL=app.js.map\n"]}

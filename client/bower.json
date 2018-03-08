@@ -1,0 +1,20 @@
+{
+  "name": "js-train-notes-client",
+  "description": "only for train purpose",
+  "main": "index.js",
+  "authors": [
+    "jandam <michal.janda@acision.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/michaljanda/js-train-notes",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.6"
+  }
+}
