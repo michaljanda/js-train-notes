@@ -1,6 +1,6 @@
 'use strict';
 
-var some = 'test';
-'dsf';
-alert("bb12");
+$(document).ready(function () {
+  document.querySelector('body').innerHTML = 'Hello world!';
+});
 //# sourceMappingURL=app.js.map

@@ -1,1 +1,1 @@
-{"version":3,"sources":["app/app.js"],"names":["some","alert"],"mappings":";;AAAA,IAAMA,OAAO,MAAb;AACA;AACAC,MAAM,MAAN","file":"app.js","sourcesContent":["const some = 'test';     \n'dsf';     \nalert(\"bb12\");  "]}
+{"version":3,"sources":["app/app.js"],"names":["$","document","ready","querySelector","innerHTML"],"mappings":";;AAAAA,EAAEC,QAAF,EAAYC,KAAZ,CAAkB,YAAM;AACtBD,WAASE,aAAT,CAAuB,MAAvB,EAA+BC,SAA/B,GAA2C,cAA3C;AACD,CAFD","file":"app.js","sourcesContent":["$(document).ready(() => {\r\n  document.querySelector('body').innerHTML = 'Hello world!';\r\n});"]}

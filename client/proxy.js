@@ -1,8 +1,19 @@
 let express = require('express');
 let proxy = require('http-proxy');
+let fs = require('fs');
+let targetDir = './dev'; 
+
 
 let app = express();
 let p = proxy.createProxyServer({ target: 'http://localhost:5000/' });
+p.on('error', function (e) {
+  //gulp reload -> browser cancels requests -> proxy gets error (ECONNRESET)
+  //unhandled error means process shutdown
+  //in case of heavy traffic (charting) this is very common
+  if (e.code === 'ECONNRESET') {
+      console.log('[API-PROXY] Connection reset - expected');
+  }
+});
 
 app.all('/api/*', function(req, res) {
   p.web(req, res);

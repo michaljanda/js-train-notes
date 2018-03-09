@@ -1,3 +1,3 @@
-const some = 'test';     
-'dsf';     
-alert("bb12");  
+$(document).ready(() => {
+  document.querySelector('body').innerHTML = 'Hello world!';
+});
