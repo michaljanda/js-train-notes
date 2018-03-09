@@ -9,15 +9,18 @@
   <meta name="author" content="MJ">
 
   <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <!-- endbower -->
 
   <!-- bower:js -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <!-- endbower -->
 
   <!-- inject:js -->
   <script src="app/app.js"></script>
+  <script src="app/services/notes-service.js"></script>
   <!-- endinject -->
 
   <!-- inject:css -->
@@ -27,6 +30,9 @@
   
 </head>
 
-<body>
+<body ng-app="jsTrain">
+  <div ng-controller="notesCtrl">
+    <div ng-repeat="n in notes">{{n.label}}</div>
+  </div>
 </body>
 </html>

@@ -16,6 +16,15 @@
   ],
   "dependencies": {
     "angular": "1.5.6",
-    "jquery": "3.3.1"
+    "jquery": "3.3.1",
+    "bootstrap": "3.3.7"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "./dist/css/bootstrap.css",
+        "./dist/js/bootstrap.js" 
+      ]
+    }
   }
 }

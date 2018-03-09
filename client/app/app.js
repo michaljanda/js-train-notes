@@ -1,3 +1,9 @@
-$(document).ready(() => {
-  document.querySelector('body').innerHTML = 'Hello world!';
+angular.module('jsTrain', []);
+angular.module('jsTrain').controller('notesCtrl', ($scope, notesService) => {
+  $scope.notes = [];
+
+  notesService.list().then((res) => {
+    $scope.notes = res.data;
+  });
+
 });
