@@ -1,0 +1,57 @@
+{
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "globals": {
+    "angular": false,
+    "$": false,
+    "d3" : false,
+    "nv" : false,
+    "jsPlumb" : false,
+    "console" : false,
+    "mes" : false,
+    "moment" : false,
+    "SvgUtils": true,
+    "InputValidator": true,
+    "config": true,
+    "_": false,
+    "enTranslationTable": true,
+    "Component": false,
+    "Controller": false,
+    "Highcharts": false,
+    "Uint8Array": false,
+    "installedModules": false
+  },
+  "rules": {
+    "strict": 0,
+    "no-bitwise": 2,
+    "no-camelcase": 0,
+    "curly": 2,
+    "eqeqeq": 2,
+    "wrap-iife": 2,
+    "indent": 0,
+    "no-use-before-define": 0,
+    "no-caller": 2,
+    "quotes": [2, "single", {"allowTemplateLiterals": true}],
+    "no-undef": 2,
+    "no-unused-vars": [1, {"vars": "local", "varsIgnorePattern": "^[A-Z].*$" }],
+    "trailing": 0,
+    "dot-notation" : 0,
+    "no-console": 0,
+    "comma-dangle": 0,
+    "no-empty": 0,
+    "no-constant-condition": 0,
+    "no-unreachable": 0,
+    "semi": 2,
+    "no-useless-escape": 1,
+    "space-infix-ops": 0,
+    "keyword-spacing": 1
+  }
+}

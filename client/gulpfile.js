@@ -9,6 +9,7 @@ let open = require('open');
 let fs = require('fs');
 let connect = require('gulp-connect');
 let rimraf = require('rimraf');
+let eslint = require('gulp-eslint');
 
 let livereload = require('gulp-livereload');
 let livereloadHook = require('connect-livereload');
@@ -23,72 +24,83 @@ let jsFiles = ['./app/**/*.js'];
 let tplFiles = ['./app/**/*.html'];
 let sassFiles = ['./app-sass-styles/**/*.scss'];
 let targetDir = './dev';
-let watchedFiles = [].concat(jsFiles, tplFiles, sassFiles, 'bower.json', indexFile);
+let watchedFiles = [].concat(
+  jsFiles,
+  tplFiles,
+  sassFiles,
+  'bower.json',
+  indexFile
+);
 
 let browserSync = require('browser-sync').create();
 let nodemon = require('nodemon');
 
-gulp.task('default', ['clean'], function () {
+gulp.task('default', ['clean'], function() {
   gulp.start('serve');
 });
 
-gulp.task('serve', ['nodemon'], function(){
+gulp.task('serve', ['nodemon'], function() {
   browserSync.init({
-    proxy: "http://localhost:3000",
-    port: 80,
+    proxy: 'http://localhost:3000',
+    port: 80
   });
 
-  let watcher = watch(watchedFiles, (event) => {
+  let watcher = watch(watchedFiles, event => {
     console.info(`[watcher] ${event.path}`);
     gulp.start('reload');
   });
 });
 
-gulp.task('nodemon', ['compile'], function (cb) {
-
+gulp.task('nodemon', ['compile'], function(cb) {
   var started = false;
 
   return nodemon({
     script: 'proxy.js'
-  }).on('start', function () {
+  }).on('start', function() {
     // to avoid nodemon being started multiple times
     if (!started) {
       cb();
       started = true;
     }
   });
-})
+});
 
-gulp.task('reload', ['compile'], function () {
+gulp.task('reload', ['compile'], function() {
   browserSync.reload();
 });
 
-gulp.task('clean', function () {
+gulp.task('clean', function() {
   rimraf.sync(targetDir);
 });
 
-gulp.task('compile', function () {
+gulp.task('compile', function() {
   return compile();
 });
 
 function compile() {
-  let js = babelize(jsFiles)
+  let pipeline = gulp
+    .src(jsFiles, { base: '.' })
+    .pipe(eslint('./.eslintrc'))
+    .pipe(eslint.format());
+  let js = babelize(pipeline)
     .pipe(gulp.dest(targetDir));
 
-  let styles = gulp.src('./app-sass-styles/**/*.scss')
-  .pipe(sass().on('error', sass.logError))
-  .pipe(gulp.dest(targetDir + '/css'));
+  let styles = gulp
+    .src('./app-sass-styles/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(targetDir + '/css'));
 
   let targetFiles = merge(js, styles);
 
-  return gulp.src(indexFile)
+  return gulp
+    .src(indexFile)
     .pipe(inject(targetFiles, { relative: true, ignorePath: ['dev/'] }))
     .pipe(wiredep.stream())
     .pipe(gulp.dest(targetDir));
 }
 
-function babelize(jsFilesPath) {
-  return gulp.src(jsFilesPath, { base: '.' })
+function babelize(pipeline) {
+  return pipeline
     .pipe(sourcemaps.init())
     .pipe(babel({ presets: ['es2015'] }).on('error', logBabelError))
     .pipe(sourcemaps.write('.'));
