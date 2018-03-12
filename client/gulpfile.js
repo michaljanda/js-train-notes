@@ -1,25 +1,16 @@
-let _ = require('lodash');
 let gulp = require('gulp');
 let inject = require('gulp-inject');
 let sourcemaps = require('gulp-sourcemaps');
 let wiredep = require('wiredep');
 let babel = require('gulp-babel');
-let express = require('express');
-let open = require('open');
-let fs = require('fs');
-let connect = require('gulp-connect');
 let rimraf = require('rimraf');
 let eslint = require('gulp-eslint');
 let templateCache = require('gulp-angular-templatecache');
 
-let livereload = require('gulp-livereload');
-let livereloadHook = require('connect-livereload');
-let proxy = require('http-proxy');
 let watch = require('gulp-watch');
 let sass = require('gulp-sass');
 let merge = require('merge2');
 
-let externalHelpers = './node_modules/babel-core/external-helpers.js';
 let indexFile = 'index.html';
 let jsEntry = ['./app.js'];
 let jsFiles = ['./app/**/*.js'];
@@ -48,7 +39,7 @@ gulp.task('serve', ['nodemon'], function() {
     port: 80
   });
 
-  let watcher = watch(watchedFiles, event => {
+  watch(watchedFiles, event => {
     console.info(`[watcher] ${event.path}`);
     gulp.start('reload');
   });
