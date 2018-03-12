@@ -10,6 +10,7 @@ let fs = require('fs');
 let connect = require('gulp-connect');
 let rimraf = require('rimraf');
 let eslint = require('gulp-eslint');
+let templateCache = require('gulp-angular-templatecache');
 
 let livereload = require('gulp-livereload');
 let livereloadHook = require('connect-livereload');
@@ -20,11 +21,13 @@ let merge = require('merge2');
 
 let externalHelpers = './node_modules/babel-core/external-helpers.js';
 let indexFile = 'index.html';
+let jsEntry = ['./app.js'];
 let jsFiles = ['./app/**/*.js'];
 let tplFiles = ['./app/**/*.html'];
 let sassFiles = ['./app-sass-styles/**/*.scss'];
 let targetDir = './dev';
 let watchedFiles = [].concat(
+  jsEntry,
   jsFiles,
   tplFiles,
   sassFiles,
@@ -78,10 +81,23 @@ gulp.task('compile', function() {
 });
 
 function compile() {
+
+  let templates = gulp.src(tplFiles)
+  .pipe(templateCache('app-templates.js', {module: 'notes', root: 'app'}))
+  .pipe(gulp.dest(targetDir));
+
   let pipeline = gulp
     .src(jsFiles, { base: '.' })
     .pipe(eslint('./.eslintrc'))
     .pipe(eslint.format());
+
+    let pipelineEntry = gulp
+    .src(jsEntry, { base: '.' })
+    .pipe(eslint('./.eslintrc'))
+    .pipe(eslint.format());
+
+  let entry = babelize(pipelineEntry)
+    .pipe(gulp.dest(targetDir));
   let js = babelize(pipeline)
     .pipe(gulp.dest(targetDir));
 
@@ -90,7 +106,7 @@ function compile() {
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(targetDir + '/css'));
 
-  let targetFiles = merge(js, styles);
+  let targetFiles = merge(entry, templates, js, styles);
 
   return gulp
     .src(indexFile)
