@@ -27,7 +27,11 @@
 <body ng-app="notes">
   <div class="container-fluid">
     <h1>Notes</h1>
-    <div ui-view></div>
+    <ul class="nav nav-tabs">
+        <li ui-sref-active="active"><a ui-sref='notes'>Notes</a></li>
+        <li ui-sref-active="active"><a ui-sref='about'>About</a></li>
+    </ul>
+    <div ui-view style="margin-top: 20px;"></div>
   </div>
 </body>
 

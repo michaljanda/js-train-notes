@@ -2,11 +2,16 @@ let app = angular.module('notes', ['ui.router']);
 
 app.config(($stateProvider, $urlRouterProvider) => {
 
-  $stateProvider.state('list', {
-    url: '/',
+  $stateProvider
+  .state('notes', {
+    url: '/notes',
     controller: 'NotesCtrl',
     templateUrl: 'app/controllers/notes/notes.html'
+  })
+  .state('about', {
+    url: '/about',
+    templateUrl: 'app/controllers/about/about.html'
   });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/notes');
 });
