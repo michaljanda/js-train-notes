@@ -18,7 +18,19 @@ app.get('/api/notes/:id', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-  res.send(notes);
+  if (_.isEmpty(req.query)) {
+    res.send(notes);
+  } else {
+    res.send(_.filter(notes, (n) => {
+      let allMatch = true;
+      _.forEach(req.query, (value, key) => {
+        if (!_.includes(n[key], value)) {
+          allMatch = false;
+        }
+      });
+      return allMatch;
+    }))
+  }
 });
 
 app.post('/api/notes', (req, res) => {
