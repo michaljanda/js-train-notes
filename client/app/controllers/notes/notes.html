@@ -1,9 +1,9 @@
 <div class="notes-list">
-  <div>
+  <div class="list">
     <div class="panel panel-default" ng-repeat=" n in notes ">
       <div class="panel-heading">{{ n.label }}</div>
       <div class="panel-body">{{ n.text }}</div>
     </div>
   </div>
-  <div class="side">Test</div>
+  <div ng-if=" selected " class="side" ui-view></div>
 </div>
