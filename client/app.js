@@ -17,6 +17,6 @@ app.config(($stateProvider, $urlRouterProvider) => {
       url: '/about',
       templateUrl: 'app/controllers/about/about.html'
     });
-
+ 
   $urlRouterProvider.otherwise('/notes');
 });

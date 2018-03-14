@@ -1,12 +1,17 @@
-.notes-list {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 2fr 1fr;
-  grid-template-areas: "content sidebar";
+.notes-list {  
+
+  display: table;
+  width: 100%;
+  
+  > div {
+    display: table-cell;
+  }
+
   div.list {
-    grid-area: content;
+
   }
   div.side {
-    grid-area: sidebar;
+    width: 400px;
+    padding: 0 5px;
   }
 }
