@@ -4,9 +4,10 @@ app.config(($stateProvider, $urlRouterProvider) => {
 
   $stateProvider
     .state('notes', {
-      url: '/notes',
+      url: '/notes?label&text',
       controller: 'NotesCtrl',
-      templateUrl: 'app/controllers/notes/notes.html'
+      templateUrl: 'app/controllers/notes/notes.html',
+      reloadOnSearch: false
     })
     .state('notes.detail', {
       url: '/:id',
