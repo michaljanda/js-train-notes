@@ -1,4 +1,4 @@
-let app = angular.module('notes', ['ui.router']);
+let app = angular.module('notes', ['ui.router', 'ui.bootstrap']);
 
 app.config(($stateProvider, $urlRouterProvider) => {
 

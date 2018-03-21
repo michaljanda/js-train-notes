@@ -1,0 +1,15 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Remove {{ note.label }}</h4>
+  </div>
+  <div class="modal-body">
+    Do you really want to remove note <b>{{note.label}}</b> ?
+    <h4>Text</h4>
+    {{note.text}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click=" instance.close() ">Remove</button>
+    <button type="button" class="btn btn-default" ng-click=" instance.dismiss() ">Cancel</button>
+  </div>
+</div>
+

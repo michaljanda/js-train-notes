@@ -1,4 +1,4 @@
-angular.module('notes').controller('NoteDetailCtrl', ($scope, notesService, $state) => {
+angular.module('notes').controller('NoteDetailCtrl', ($scope, notesService, $state, $uibModal) => {
 
   $scope.update = () => {
     notesService.update($scope.edited).then((updated) => {
@@ -7,10 +7,20 @@ angular.module('notes').controller('NoteDetailCtrl', ($scope, notesService, $sta
   };
 
   $scope.remove = () => {
-    notesService.remove($scope.edited.id).then(() => {
-      _.remove($scope.notes, {id: $scope.edited.id});
-      $state.go('notes');
+    let note = $scope.edited;
+    $uibModal.open({
+      templateUrl: 'app/controllers/notes/note-remove-modal.html',
+      controller: ($scope, $uibModalInstance) => {
+          $scope.note = note;
+          $scope.instance = $uibModalInstance;
+      }
+    }).result.then(() => {
+      notesService.remove($scope.edited.id).then(() => {
+        _.remove($scope.notes, {id: $scope.edited.id});
+        $state.go('notes');
+      });
     });
+
   };
 
 });

@@ -19,7 +19,8 @@
     "jquery": "3.3.1",
     "bootstrap": "3.3.7",
     "angular-ui-router": "1.0.15",
-    "lodash": "4.17.5"
+    "lodash": "4.17.5",
+    "angular-bootstrap": "2.5.0"
   },
   "overrides": {
     "bootstrap": {
