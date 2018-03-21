@@ -8,11 +8,20 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
     console.log('loading');
     notesService.list($scope.query).then(data => {
       $scope.notes = data;
-      if ($state.params.id) {
+      if (getUrlId()) {
         selectDetail();
       }
     });
   }
+
+  $scope.removeNote = function (id) {
+    notesService.remove(id).then(() => {
+        _.remove($scope.notes, {id: id});
+        if (id === getUrlId()) {
+          $state.go('notes');
+        }
+    });
+  };
 
   load();
 
@@ -28,7 +37,7 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
     if (!_.isEqual($scope.query, _.pick(t.params('from'), queryParams))) {
       load();
     }
-    if (+$state.params.id !== _.get($scope, 'selecte.id')) {
+    if (getUrlId() !== _.get($scope, 'selected.id')) {
       selectDetail();
     }
   });
@@ -44,6 +53,10 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
   function selectDetail() {
     $scope.selected = _.find($scope.notes, { id: +$state.params.id });
     $scope.edited = _.cloneDeep($scope.selected);
+  }
+
+  function getUrlId() {
+    return +$state.params.id;
   }
 
 });
