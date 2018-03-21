@@ -23,11 +23,6 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
 
   $scope.$watchCollection('query', debouncedLoad);
 
-
-  $scope.goToDetail = (note) => {
-    $state.go('notes.detail', { id: note.id });
-  };
-
   let unregisterOnChangeEvent = $transitions.onSuccess({}, (t) => {
     updateQueryFromUrl();
     if (!_.isEqual($scope.query, _.pick(t.params('from'), queryParams))) {

@@ -11,10 +11,11 @@
 
 <div class="notes-list">
   <div class="list">
-    <div class="panel panel-default" ng-repeat=" n in notes ">
-      <div class="panel-heading" ng-click=" goToDetail(n) ">{{ n.label }}</div>
-      <div class="panel-body">{{ n.text }}</div>
-    </div>
+    <note-panel ng-repeat=" n in notes " note=" n "></note-panel>
+    <!--<div class="panel panel-default" ng-repeat=" n in notes ">-->
+      <!--<div class="panel-heading" ng-click=" goToDetail(n) ">{{ n.label }}</div>-->
+      <!--<div class="panel-body">{{ n.text }}</div>-->
+    <!--</div>-->
   </div>
-  <div ng-if=" selected " class="side" ui-view></div> 
+  <div ng-if=" selected " class="side" ui-view></div>
 </div>

@@ -16,6 +16,8 @@ let jsEntry = ['./app.js'];
 let jsFiles = ['./app/**/*.js'];
 let tplFiles = ['./app/**/*.html'];
 let sassFiles = ['./app-sass-styles/**/*.scss'];
+let sassEntry = ['./app-sass-styles/styles.scss'];
+
 let targetDir = './dev';
 let watchedFiles = [].concat(
   jsEntry,
@@ -93,8 +95,10 @@ function compile() {
     .pipe(gulp.dest(targetDir));
 
   let styles = gulp
-    .src('./app-sass-styles/**/*.scss')
+    .src(sassEntry)
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(targetDir + '/css'));
 
   let targetFiles = merge(entry, templates, js, styles);
