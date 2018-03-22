@@ -60,7 +60,8 @@ function generateInitialNotes(number) {
       toReturn.push({
         id: index,
         label: `Note ${index} label`,
-        text: `Some amazing text of note with id ${index}`,
+        text: `Some amazing text of note with id ${id}`,
+        time: Date.now()
       });
     })(index);
   }
