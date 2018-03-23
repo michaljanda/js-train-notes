@@ -7,6 +7,12 @@
     <label for="idTextFilter">text</label>
     <input type="text" ng-model=" query.text " class="form-control" id="idTextFilter" placeholder="Text filter">
   </div>
+  <button class="btn btn-default" uib-tooltip="Toggle check" ng-click=" toggleCheck() ">
+    <i class="fa fa-check-square"></i>
+  </button>
+  <div class="pull-right">
+    <span ng-show=" numberOfSelected() ">Selected {{ numberOfSelected() }}  | </span>
+  </div>
 </form>
 
 <div class="notes-list">

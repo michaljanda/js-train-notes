@@ -33,8 +33,18 @@ app.get('/api/notes', (req, res) => {
   }
 });
 
+app.post('/api/notes/batch-delete', (req, res) => {
+  let removedCount = 0;
+  _.forEach(req.body, function (id) {
+    _.remove(notes, {id: +id}) && removedCount++;
+  });
+  res.send({removed: removedCount});
+});
+
 app.post('/api/notes', (req, res) => {
-  notes.push(_.pick(req.body, ['id', 'label', 'text']));
+  let newNote = _.pick(req.body, ['id', 'label', 'text', 'time']);
+  notes.push(newNote);
+  res.send(newNote);
 });
 
 app.put('/api/notes', (req, res) => {
@@ -46,7 +56,6 @@ app.put('/api/notes', (req, res) => {
 app.delete('/api/notes', (req, res) => {
   res.send(_.remove(notes, {id: +req.query.id}));
 });
-
 
 app.listen(port, () => {
   console.log('listening on port: ', port);

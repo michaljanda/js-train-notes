@@ -23,6 +23,21 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
     });
   };
 
+  $scope.toggleCheck = function () {
+    let newState = $scope.notes.length !== $scope.numberOfSelected();
+    _.map($scope.notes, function (n) {
+      n.$$selected = newState;
+    });
+  };
+
+  $scope.numberOfSelected = function () {
+    return getSelectedNotes().length;
+  };
+
+  function getSelectedNotes() {
+    return _.filter($scope.notes, {$$selected: true});
+  }
+
   load();
 
   let debouncedLoad = _.debounce(() => {
