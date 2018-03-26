@@ -25,9 +25,13 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
 
   $scope.toggleCheck = function () {
     let newState = $scope.notes.length !== $scope.numberOfSelected();
-    _.map($scope.notes, function (n) {
-      n.$$selected = newState;
-    });
+    // _.map($scope.notes, function (n) {
+    //   n.$$selected = newState;
+    // });
+    
+    // event way
+    $scope.$broadcast('note-panel:updateCheck', newState);
+    
   };
 
   $scope.removeSelected = function () {
