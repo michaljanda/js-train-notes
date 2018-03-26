@@ -6,7 +6,7 @@ angular.module('notes').factory('modalService', function ($uibModal) {
       return showModal(_.merge({
         header: 'Confirmation',
         msg: 'Do you really want to proceed this action?'
-      }, opts))
+      }, opts));
     }
   };
 
