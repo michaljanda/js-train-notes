@@ -11,7 +11,11 @@
     <i class="fa fa-check-square"></i>
   </button>
   <div class="pull-right">
-    <span ng-show=" numberOfSelected() ">Selected {{ numberOfSelected() }}  | </span>
+
+    <span ng-show=" numberOfSelected() ">
+      Selected {{ numberOfSelected() }}
+      <button class="btn btn-danger" ng-click=" removeSelected() " uib-tooltip="Remove selected"><i class="fa fa-times"></i></button>
+    </span>
   </div>
 </form>
 

@@ -1,4 +1,4 @@
-angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $transitions, $location) => {
+angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $transitions, $location, modalService) => {
 
   let queryParams = ['label', 'text'];
   $scope.query = {};
@@ -27,6 +27,14 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
     let newState = $scope.notes.length !== $scope.numberOfSelected();
     _.map($scope.notes, function (n) {
       n.$$selected = newState;
+    });
+  };
+
+  $scope.removeSelected = function () {
+    modalService.confirm({msg: `Do you really want to remove ${$scope.numberOfSelected()} selected notes?`}).then(() => {
+      notesService.removeList(_.map(getSelectedNotes(), 'id')).then(() => {
+        load();
+      });
     });
   };
 
