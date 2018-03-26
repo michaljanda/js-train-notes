@@ -11,4 +11,33 @@
     width: 400px;
     padding: 0 5px;
   }
+
+  .panel {
+    position: relative;
+  }
+
+  .animated {
+    overflow: hidden;
+    &.ng-leave {
+      transition:0.5s linear all;
+      .panel {
+        transform-origin: top;
+        animation:0.5s linear leave_animation;
+      }
+    }
+  }
+}
+
+
+@keyframes leave_animation {
+  from {
+    left: 0;
+    opacity: 1;
+    max-height: 90px;
+  }
+  to {
+    left: -100px;
+    opacity: 0;
+    max-height: 0;
+  }
 }

@@ -1,4 +1,4 @@
-let app = angular.module('notes', ['ui.router', 'ui.bootstrap']);
+let app = angular.module('notes', ['ui.router', 'ui.bootstrap', 'ngAnimate']);
 
 app.config(($stateProvider, $urlRouterProvider) => {
 
