@@ -3,16 +3,16 @@
     <h3>{{ selected.label }}</h3>
   </div>
 
-  <form class="form-horizontal">
+  <form class="form-horizontal" name="noteEditForm" ng-submit=" update() ">
     <div ng-include="'app/controllers/notes/note-inputs.html'"></div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default btn-primary" ng-click=" update() ">Update</button>
+        <button class="btn btn-default btn-primary" ng-disabled="noteEditForm.$invalid || !noteEditForm.$dirty">Update</button>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default btn-danger" ng-click=" remove() ">Remove</button>
+        <button type="button" class="btn btn-default btn-danger" ng-click=" remove() ">Remove</button>
       </div>
     </div>
   </form>

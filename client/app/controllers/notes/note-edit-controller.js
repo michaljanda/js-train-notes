@@ -2,6 +2,7 @@ angular.module('notes').controller('NoteEditCtrl', ($scope, notesService, $state
   $scope.update = () => {
     notesService.update($scope.edited).then((updated) => {
       _.merge($scope.selected, updated);
+      $scope.noteEditForm.$setPristine(); // injected from template
     });
   };
 
