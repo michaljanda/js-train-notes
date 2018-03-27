@@ -40,8 +40,11 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
 
   $scope.removeSelected = function () {
     modalService.confirm({msg: `Do you really want to remove ${$scope.numberOfSelected()} selected notes?`}).then(() => {
-      notesService.removeList(_.map(getSelectedNotes(), 'id')).then(() => {
-        load();
+      let ids = _.map(getSelectedNotes(), 'id');
+      notesService.removeList(ids).then(() => {
+        _.remove($scope.notes, function (n) {
+          return _.includes(ids, n.id);
+        });
       });
     });
   };
