@@ -1,4 +1,5 @@
-<form class="form-inline margin-bot-10">  
+<form class="form-inline margin-bot-10">
+
   <div class="form-group">
     <label for="idNameFilter">Filter by name</label>
     <input type="text" ng-model=" query.label " class="form-control" id="idNameFilter" placeholder="Name filter">
@@ -10,22 +11,30 @@
   <button class="btn btn-default" uib-tooltip="Toggle check" ng-click=" toggleCheck() ">
     <i class="fa fa-check-square"></i>
   </button>
+
   <div class="pull-right">
+
+    <button class="btn btn-primary" ui-sref="notes.add" ng-disabled=" isAddState() " uib-tooltip="Add new note">
+      <i class="fa fa-plus"></i>
+    </button>
 
     <span ng-show=" numberOfSelected() ">
       Selected {{ numberOfSelected() }}
       <button class="btn btn-danger" ng-click=" removeSelected() " uib-tooltip="Remove selected"><i class="fa fa-times"></i></button>
     </span>
+
   </div>
 </form>
 
 <div class="notes-list">
   <div class="list">
-    <note-panel ng-repeat=" n in notes " note=" n " on-remove=" removeNote(id) " class="animated"></note-panel>
+    <note-panel ng-repeat=" n in notes | orderBy:'-id' " note=" n " on-remove=" removeNote(id) " class="animated"></note-panel>
     <!--<div class="panel panel-default" ng-repeat=" n in notes ">-->
       <!--<div class="panel-heading" ng-click=" goToDetail(n) ">{{ n.label }}</div>-->
       <!--<div class="panel-body">{{ n.text }}</div>-->
     <!--</div>-->
   </div>
-  <div ng-if=" selected " class="side" ui-view></div>
+
+  <div class="side" ng-if=" selected || isAddState() " ui-view></div>
+
 </div>

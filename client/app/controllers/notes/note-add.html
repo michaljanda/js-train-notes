@@ -1,0 +1,14 @@
+<div class="sidebar">
+  <div class="text-center">
+    <h3>{{ edited.label || 'New note' }}</h3>
+  </div>
+
+  <form class="form-horizontal" name="newNoteForm" ng-submit=" add() ">
+    <div ng-include=" 'app/controllers/notes/note-inputs.html' "></div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button class="btn btn-default btn-primary" ng-disabled=" newNoteForm.$invalid ">Add note</button>
+      </div>
+    </div>
+  </form>
+</div>

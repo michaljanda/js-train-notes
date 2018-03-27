@@ -1,5 +1,9 @@
 angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $transitions, $location, modalService) => {
 
+  $scope.isAddState = function () {
+    return $state.is('notes.add');
+  };
+
   let queryParams = ['label', 'text'];
   $scope.query = {};
   updateQueryFromUrl();
@@ -8,7 +12,7 @@ angular.module('notes').controller('NotesCtrl', ($scope, notesService, $state, $
     console.log('loading');
     notesService.list($scope.query).then(data => {
       $scope.notes = data;
-      if (getUrlId()) {
+      if (getUrlId() > -1) {
         selectDetail();
       }
     });

@@ -4,18 +4,7 @@
   </div>
 
   <form class="form-horizontal">
-    <div class="form-group">
-      <label for="idLabel" class="col-sm-2 control-label">Label</label>
-      <div class="col-sm-10">
-        <input ng-model=" edited.label " type="text" class="form-control" id="idLabel" placeholder="Label">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="idText" class="col-sm-2 control-label">Text</label>
-      <div class="col-sm-10">
-        <input ng-model=" edited.text " type="text" class="form-control" id="idText" placeholder="Label">
-      </div>
-    </div>
+    <div ng-include="'app/controllers/notes/note-inputs.html'"></div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default btn-primary" ng-click=" update() ">Update</button>

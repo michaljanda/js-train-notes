@@ -1,5 +1,4 @@
-angular.module('notes').controller('NoteDetailCtrl', ($scope, notesService, $state, $uibModal) => {
-
+angular.module('notes').controller('NoteEditCtrl', ($scope, notesService, $state, $uibModal) => {
   $scope.update = () => {
     notesService.update($scope.edited).then((updated) => {
       _.merge($scope.selected, updated);

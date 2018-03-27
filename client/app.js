@@ -11,8 +11,13 @@ app.config(($stateProvider, $urlRouterProvider) => {
     })
     .state('notes.detail', {
       url: '/:id',
-      templateUrl: 'app/controllers/notes/note-detail.html',
-      controller: 'NoteDetailCtrl'
+      templateUrl: 'app/controllers/notes/note-edit.html',
+      controller: 'NoteEditCtrl'
+    })
+    .state('notes.add', {
+      url: '/add',
+      templateUrl: 'app/controllers/notes/note-add.html',
+      controller: 'NoteAddCtrl'
     })
     .state('about', {
       url: '/about',

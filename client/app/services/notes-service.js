@@ -14,12 +14,17 @@ angular.module('notes').factory('notesService', ($http) => {
       });
     },
     remove: (id) => {
-      return $http.delete(baseUrl, {params: {id: id}}).then((res) => { 
-        return res.data; 
+      return $http.delete(baseUrl, {params: {id: id}}).then((res) => {
+        return res.data;
       });
     },
     removeList: (ids) => {
       return $http.post(baseUrl + '/batch-delete', ids).then((res) => {
+        return res.data;
+      });
+    },
+    add: (n) => {
+      return $http.post(baseUrl, n).then((res) => {
         return res.data;
       });
     }

@@ -25,6 +25,13 @@
         animation:0.5s leave_animation;
       }
     }
+    &.ng-enter {
+      transition:0.3s;
+      .panel {
+        transform-origin: top;
+        animation:0.5s leave_animation reverse;
+      }
+    }
   }
 }
 

@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 
 const notes = generateInitialNotes(50);
+const fields = ['id', 'label', 'text', 'time'];
 
 app.get('/api/test', (req, res) => {
   res.send('Test works');
@@ -42,14 +43,14 @@ app.post('/api/notes/batch-delete', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-  let newNote = _.pick(req.body, ['id', 'label', 'text', 'time']);
+  let newNote = _.merge(_.pick(req.body, fields), {id: _.max(_.map(notes, 'id')) + 1, time: Date.now()});
   notes.push(newNote);
   res.send(newNote);
 });
 
 app.put('/api/notes', (req, res) => {
   let found = _.find(notes, {id: req.body.id});
-  _.merge(found, req.body);
+  _.merge(found, _.assign(_.pick(req.body, fields)), {time: Date.now()});
   res.send(found);
 });
 
