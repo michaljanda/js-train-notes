@@ -19,8 +19,9 @@
     </button>
 
     <span ng-show=" numberOfSelected() ">
-      Selected {{ numberOfSelected() }}
-      <button class="btn btn-danger" ng-click=" removeSelected() " uib-tooltip="Remove selected"><i class="fa fa-times"></i></button>
+      <button class="btn btn-danger" ng-click=" removeSelected() " uib-tooltip="Remove selected">
+        <i class="fa fa-times"></i> Remove selected notes ({{numberOfSelected()}})
+      </button>
     </span>
 
   </div>
